@@ -12,11 +12,6 @@ headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWeb
   "Cookie" : "xxxx_1234_saltkey=xxxxxx; xxxx_1234_auth=xxxxxxxxxxxxxxxxxxxx",
   "Host": "你的论坛网址",
   "Referer": "https://你的论坛网址/plugin.php?id=dsu_paulsign:sign"}
-form_data = {
-    "formhash": "cb4f0a01",
-    "qdxq": "kx",
-    "todaysay": "今天很开心！",
-}
 #以上请修改成自己的配置
 #--------------------------------------
 
@@ -25,17 +20,29 @@ import requests
 from bs4 import BeautifulSoup
 import html
 
-r= requests.post(url, data=form_data, headers=headers)
+#获取随机想说的话
+mao = "http://api.maomao.tech/api/yiyan"
+todaysay = requests.get(mao)
+todaysay.encoding="UTF-8"
+say=todaysay.text
 
+#心情
+form_data = {
+    "formhash": "cb4f0a01",
+    "qdxq": "kx",
+    "todaysay": say,
+}
+
+#发送请求获取响应
+r= requests.post(url, data=form_data, headers=headers)
 r.encoding="UTF-8"
 soup = BeautifulSoup(r.text, 'xml')
 html_text = html.unescape(soup.text)
 soup1 = BeautifulSoup(html_text, 'html.parser')
+
+#寻找提示语句
 div = soup1.find('div', class_='c')
 text = div.get_text()
+
+#输出
 print(text)
-
-
-
-
-
