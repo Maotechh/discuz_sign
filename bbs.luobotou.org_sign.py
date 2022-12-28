@@ -1,6 +1,7 @@
 # 需要提前执行：(报错请用pip3 install xxxxxx)
 # pip install requests
 # pip install bs4
+
 #--------------------------------------
 #此处修改成你的配置
 url='https://bbs.luobotou.org/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1'
@@ -9,14 +10,9 @@ headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWeb
   "Accept-Language": "zh-CN,zh;q=0.9",
   "Accept-Encoding": "gzip, deflate, br",
   "Connection": "keep-alive",
-  "Cookie" : "bWmD_2132_saltkey=Hpqt7Wo; bWmD_2132_auth=55c0LnKt0jMX7n9kR83lXiPS5WnGm9Y%2FRhW3pfPN31HKeBKkixt5wDn0IT6OKhbzUSGIzER%2BGPs1V0WVAs8xKMY",
+  "Cookie" : "bWmD_2132_saltkey=HpAt7Wo; bWmD_2132_auth=55c0LnKt0jMX7n29kR83HlXPS5WnGm92FRhW3pRfPN31eBKkixt5wDn0IT6OKhbzUSGIz%2ZPs1V0WVAs8xKMY",
   "Host": "bbs.luobotou.org",
   "Referer": "https://bbs.luobotou.org/plugin.php?id=dsu_paulsign:sign"}
-form_data = {
-    "formhash": "cb4f0a01",
-    "qdxq": "kx",
-    "todaysay": "今天很开心！",
-}
 #以上请修改成自己的配置
 #--------------------------------------
 
@@ -25,17 +21,29 @@ import requests
 from bs4 import BeautifulSoup
 import html
 
-r= requests.post(url, data=form_data, headers=headers)
+#获取随机想说的话
+mao = "http://api.maomao.tech/api/yiyan"
+todaysay = requests.get(mao)
+todaysay.encoding="UTF-8"
+say=todaysay.text
 
+#心情
+form_data = {
+    "formhash": "cb4f0a01",
+    "qdxq": "kx",
+    "todaysay": say,
+}
+
+#发送请求获取响应
+r= requests.post(url, data=form_data, headers=headers)
 r.encoding="UTF-8"
 soup = BeautifulSoup(r.text, 'xml')
 html_text = html.unescape(soup.text)
 soup1 = BeautifulSoup(html_text, 'html.parser')
+
+#寻找提示语句
 div = soup1.find('div', class_='c')
 text = div.get_text()
+
+#输出
 print(text)
-
-
-
-
-
