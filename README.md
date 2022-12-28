@@ -10,3 +10,4 @@
 请求网址即为“url”的值
 再进入“应用”标签栏（英文是Applications）
 <img width="626" alt="image" src="https://user-images.githubusercontent.com/109655023/209746556-138f45b9-e63c-4894-9475-90c6a3e4593b.png">
+找到“auth”与“saltkey”（前缀和我不一定一样）复制名称与值，粘贴到脚本"Cookie" :的位置
