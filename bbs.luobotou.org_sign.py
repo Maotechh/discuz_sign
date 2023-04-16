@@ -10,7 +10,7 @@ headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWeb
   "Accept-Language": "zh-CN,zh;q=0.9",
   "Accept-Encoding": "gzip, deflate, br",
   "Connection": "keep-alive",
-  "Cookie" : "bWmD_2132_saltkey=HpAt7Wo; bWmD_2132_auth=55c0LnKt0jMX7n29kR83HlXPS5WnGm92FRhW3pRfPN31eBKkixt5wDn0IT6OKhbzUSGIz%2ZPs1V0WVAs8xKMY",
+  "Cookie" : "xxxx_1234_saltkey=xxxxxxxxxx; xxxx_1234_auth=xxxxxxxxxxxxxxxxxxx",
   "Host": "bbs.luobotou.org",
   "Referer": "https://bbs.luobotou.org/plugin.php?id=dsu_paulsign:sign"}
 #以上请修改成自己的配置
